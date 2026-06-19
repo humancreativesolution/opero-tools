@@ -41,7 +41,7 @@ function getTenantHost() {
   return window.location.hostname;
 }
 
-export function LoginPage() {
+export default function LoginPage() {
   const tenantHost = getTenantHost();
 
   return (
