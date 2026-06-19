@@ -12,10 +12,10 @@ import SettingsPage from "@pages/settings";
 import SuppliersPage from "@pages/suppliers";
 import UsersPage from "@pages/users";
 
-import { AppLayout } from "@/layouts/app/AppLayout";
-import { PosLayout } from "@/layouts/pos/PosLayout";
-import { ProtectedRoute } from "@/routes/ProtectedRoute";
-import { PublicRoute } from "@/routes/PublicRoute";
+import { AppLayout } from "@/layouts/app/app.layout";
+import { PosLayout } from "@/layouts/pos/pos.layout";
+import { ProtectedRoute } from "@/routes/protected-route";
+import { PublicRoute } from "@/routes/public-route";
 
 const routes = [
   {

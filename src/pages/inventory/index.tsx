@@ -1,4 +1,4 @@
-import { PlaceholderPage } from "@/pages/shared/PlaceholderPage";
+import { PlaceholderPage } from "@/components/placeholder-page/placeholder-page.component";
 
 export default function InventoryPage() {
   return (

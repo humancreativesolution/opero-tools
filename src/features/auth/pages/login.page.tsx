@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { LoginForm } from "@/features/auth/components/LoginForm";
+import { LoginForm } from "@/features/auth/components/login-form.component";
 import { BarChart3, Boxes, PackageSearch, ShieldCheck } from "lucide-react";
 
 const capabilities = [

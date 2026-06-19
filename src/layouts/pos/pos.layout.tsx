@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { AuthMenu } from "@/features/auth/components/AuthMenu";
+import { AuthMenu } from "@/features/auth/components/auth-menu.component";
 
 export function PosLayout() {
   return (
