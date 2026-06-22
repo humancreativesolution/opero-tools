@@ -4,6 +4,7 @@ import type {
   InventoryBalance,
   InventoryFilterInput,
   InventoryTransactionEntity,
+  SetInitialStockInput,
   StockAdjustmentInput,
   StockTransferInput,
 } from "@/graphql/generated";
@@ -66,6 +67,25 @@ const ADJUST_STOCK = /* GraphQL */ `
 const TRANSFER_STOCK = /* GraphQL */ `
   mutation TransferStock($input: StockTransferInput!) {
     transferStock(input: $input) {
+      id
+      productId
+      product
+      locationId
+      location
+      transactionType
+      referenceId
+      referenceType
+      qtyIn
+      qtyOut
+      balanceAfter
+      createdAt
+    }
+  }
+`;
+
+const SET_INITIAL_STOCK = /* GraphQL */ `
+  mutation SetInitialStock($input: SetInitialStockInput!) {
+    setInitialStock(input: $input) {
       id
       productId
       product
@@ -145,6 +165,25 @@ export function useTransferStock() {
     mutationFn: (input: StockTransferInput) =>
       gqlClient.request<{ transferStock: InventoryTransactionEntity[] }>(
         TRANSFER_STOCK,
+        { input },
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: inventoryKeys.all });
+      queryClient.invalidateQueries({ queryKey: productKeys.posLists() });
+    },
+    onError: (error: unknown) => {
+      throw ErrorHelper.parse(error);
+    },
+  });
+}
+
+export function useSetInitialStock() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (input: SetInitialStockInput) =>
+      gqlClient.request<{ setInitialStock: InventoryTransactionEntity[] }>(
+        SET_INITIAL_STOCK,
         { input },
       ),
     onSuccess: () => {

@@ -5,6 +5,7 @@ import {
   ChevronDown,
   ChevronRight,
   History,
+  PackagePlus,
   Search,
 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -22,6 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { InitialStockFormSheet } from "@/features/inventory/components/initial-stock-form-sheet.component";
 import { StockTransferFormSheet } from "@/features/inventory/components/stock-transfer-form-sheet.component";
 import type {
   InventoryBalance,
@@ -80,6 +82,7 @@ export default function InventoryPage() {
   const [expandedProductIds, setExpandedProductIds] = useState<
     Record<string, boolean>
   >({});
+  const [initialStockSheetOpen, setInitialStockSheetOpen] = useState(false);
   const [transferSheetOpen, setTransferSheetOpen] = useState(false);
   const inventoryFilter = {
     filter: {
@@ -366,6 +369,10 @@ export default function InventoryPage() {
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <Button onClick={() => setInitialStockSheetOpen(true)} variant="outline">
+            <PackagePlus className="size-4" />
+            Set initial stock
+          </Button>
           <Button onClick={() => setTransferSheetOpen(true)}>
             <ArrowRightLeft className="size-4" />
             Transfer stock
@@ -418,6 +425,11 @@ export default function InventoryPage() {
           )}
         </CardContent>
       </Card>
+
+      <InitialStockFormSheet
+        onOpenChange={setInitialStockSheetOpen}
+        open={initialStockSheetOpen}
+      />
 
       <StockTransferFormSheet
         onOpenChange={setTransferSheetOpen}

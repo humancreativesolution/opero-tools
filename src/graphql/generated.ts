@@ -98,6 +98,11 @@ export type CreateUserInput = {
   role?: UserRole;
 };
 
+export type InitialStockItemInput = {
+  productId: Scalars['ID']['input'];
+  qty: Scalars['Int']['input'];
+};
+
 export type InventoryBalance = {
   __typename?: 'InventoryBalance';
   balance: Scalars['Int']['output'];
@@ -187,6 +192,7 @@ export type Mutation = {
   removeSupplier: SupplierEntity;
   removeTenant: TenantEntity;
   removeUser: UserEntity;
+  setInitialStock: Array<InventoryTransactionEntity>;
   transferStock: Array<InventoryTransactionEntity>;
   updateLocation: LocationEntity;
   updateProduct: ProductEntity;
@@ -290,6 +296,11 @@ export type MutationRemoveTenantArgs = {
 
 export type MutationRemoveUserArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type MutationSetInitialStockArgs = {
+  input: SetInitialStockInput;
 };
 
 
@@ -398,7 +409,7 @@ export type PosProduct = {
 };
 
 export type PosProductFilterInput = {
-  inStockOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  inStockOnly?: Scalars['Boolean']['input'];
   limit?: Scalars['Int']['input'];
   locationId: Scalars['ID']['input'];
   page?: Scalars['Int']['input'];
@@ -659,6 +670,12 @@ export const SaleType = {
 } as const;
 
 export type SaleType = typeof SaleType[keyof typeof SaleType];
+export type SetInitialStockInput = {
+  items: Array<InitialStockItemInput>;
+  locationId: Scalars['ID']['input'];
+  notes?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type StockAdjustmentInput = {
   adjustmentType: AdjustmentType;
   locationId: Scalars['ID']['input'];
